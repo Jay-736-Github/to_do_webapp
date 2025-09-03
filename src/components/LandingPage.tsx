@@ -23,7 +23,7 @@ export default function LandingPage({
   };
 
   return (
-    <div className="flex items-start justify-center min-h-screen bg-background dark:bg-background-dark transition-colors pt-24">
+    <div className="flex items-start justify-center min-h-screen bg-background transition-colors pt-24 px-4 sm:px-0">
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 40 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -31,19 +31,18 @@ export default function LandingPage({
         whileHover={{ scale: 1.02, y: -5 }}
         className="w-full max-w-lg"
       >
-        <Card className="rounded-3xl shadow-2xl border border-muted dark:border-muted-dark bg-card/90 dark:bg-card-dark/90 backdrop-blur-md transition-colors">
-          <CardHeader className="text-center space-y-3">
-            <CardTitle className="text-4xl font-bold tracking-tight font-[Georgia]">
+        <Card className="rounded-3xl shadow-2xl border border-muted bg-card/90 backdrop-blur-md transition-colors">
+          <CardHeader className="text-center space-y-3 px-4 sm:px-6 pt-8 sm:pt-10">
+            <CardTitle className="text-3xl sm:text-4xl font-bold tracking-tight font-[Georgia]">
               Welcome 👋
             </CardTitle>
-            <CardDescription className="text-lg text-muted-foreground dark:text-muted-foreground-dark font-[Georgia]">
-              Enter your email to unlock your to-do list and make today
-              productive.
+            <CardDescription className="text-base sm:text-lg text-muted-foreground font-[Georgia]">
+              Enter your email to unlock your to-do list.
             </CardDescription>
           </CardHeader>
 
-          <CardContent>
-            <form onSubmit={handleSubmit} className="grid gap-6">
+          <CardContent className="p-4 sm:p-6">
+            <form onSubmit={handleSubmit} className="grid gap-4 sm:gap-6">
               <motion.div whileFocus={{ scale: 1.02 }}>
                 <Input
                   type="email"

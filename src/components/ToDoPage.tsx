@@ -53,7 +53,6 @@ export default function ToDoPage({ userEmail, onLogout }: ToDoPageProps) {
   const [currentNotes, setCurrentNotes] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
   useEffect(() => {
     localStorage.setItem(`tasks_${userEmail}`, JSON.stringify(tasks));
   }, [tasks, userEmail]);
@@ -105,20 +104,27 @@ export default function ToDoPage({ userEmail, onLogout }: ToDoPageProps) {
     setCurrentNotes("");
   };
 
- 
   const sortedTasks = [...tasks].sort((a, b) => {
     if (a.isCompleted === b.isCompleted) return 0;
     return a.isCompleted ? 1 : -1;
   });
 
   return (
-    <div className="container mx-auto p-4 md:p-8 max-w-3xl">
-  
-      <header className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold font-[Georgia] text-accent-foreground">
+    <div className="container mx-auto px-4 pb-8 md:px-8 md:pb-12 max-w-3xl">
+      <header className="flex justify-between items-center mb-6 md:mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold font-[Georgia] text-accent-foreground">
           Your Tasks
         </h1>
-        <Button variant="ghost" onClick={onLogout}>
+        <Button
+          variant="ghost"
+          onClick={onLogout}
+          size="icon"
+          className="md:hidden"
+        >
+          <LogOut className="h-5 w-5" />
+          <span className="sr-only">Logout</span>
+        </Button>
+        <Button variant="ghost" onClick={onLogout} className="hidden md:flex">
           <LogOut className="mr-2 h-4 w-4" /> Logout
         </Button>
       </header>
@@ -138,11 +144,10 @@ export default function ToDoPage({ userEmail, onLogout }: ToDoPageProps) {
                 <Card
                   className={cn(
                     "transition-colors duration-300 shadow-lg hover:shadow-2xl rounded-xl",
-
                     task.isCompleted ? "bg-muted/50" : "bg-card"
                   )}
                 >
-                  <CardContent className="p-4 flex items-center gap-4 group">
+                  <CardContent className="p-4 flex items-center gap-3 sm:gap-4 group">
                     <Checkbox
                       id={`task-${task.id}`}
                       checked={task.isCompleted}
@@ -153,7 +158,6 @@ export default function ToDoPage({ userEmail, onLogout }: ToDoPageProps) {
                       placeholder={`Type your task here...`}
                       className={cn(
                         "flex-grow text-base border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 p-0 h-auto font-[Georgia]",
-     
                         task.isCompleted &&
                           "line-through text-muted-foreground opacity-70"
                       )}
@@ -197,7 +201,7 @@ export default function ToDoPage({ userEmail, onLogout }: ToDoPageProps) {
       >
         <Button
           onClick={handleAddTask}
-          size="lg" 
+          size="lg"
           className="w-full md:w-auto rounded-xl shadow-md font-[Georgia]"
         >
           <PlusCircle className="mr-2 h-5 w-5" /> Add Task
